@@ -11,15 +11,32 @@
         var operator = "<%= operation.operator %>"
 
         const generateProblemStatement = (val1,val2,operator,variable) => {
-            let partOne = `Rahul has ${val1} ${variable}, Abir has ${val2} ${variable}. `
+            let partOne = `Rahul has ${val1} ${variable}, Abir has ${val2} ${variable}. `;
+            let partOnepartTwo = `Rahul has ${val1} ${variable}. ` ;
+            let partOnepartThree = `Rahul has ${val1} ${variable} which cost $${val2} each. ` ;
+            let partOnepartFour = `${val1} ${variable} cost ${val2}. ` ;
             let partTwo;
+            let problemStatement;
             if(operator === "+"){
-                partTwo = `How many ${variable} do they have together?`
+                partTwo = `How many ${variable} do they have together?`;
+                problemStatement = partOne + partTwo;
             }
-            let problemStatement = partOne + partTwo;
+            else if(operator === "-"){
+                partTwo = `How many ${variable} does Abir have if Rahul gives him ${val2} ${variable} ?`;
+                problemStatement = partOnepartTwo + partTwo;
+            }
+            else if(operator === "*"){
+                partTwo = `How much does ${val1} ${variable} cost?`;
+                problemStatement = partOnepartThree + partTwo;
+            }
+            else if(operator === "/"){
+                partTwo = `How much does each ${variable} cost?`;
+                problemStatement = partOnepartFour + partTwo;
+            }
+            console.log(problemStatement);
             return problemStatement;
         }
-        var problemStatement = generateProblemStatement(val1,val2,operator,variable)
+        var problemStatement = generateProblemStatement(val1,val2,operator,variable);
         document.getElementById("problemStatement").innerHTML = problemStatement;
         
         
