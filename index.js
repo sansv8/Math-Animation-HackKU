@@ -7,7 +7,7 @@ const ReactDOM = require('react-dom')
 
 const { MongoClient } = require("mongodb");
 const url = "mongodb+srv://math_animation:bzSsxbPMCntsYMSl@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
-
+const client = new MongoClient(url);
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname })
