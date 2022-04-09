@@ -14,7 +14,7 @@ const client = new MongoClient(url);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile('/publc/html/index.html', {root: __dirname })
+  res.sendFile('/public/html/index.html', {root: __dirname })
 });
 
 app.get('/student', (req,res) => {
@@ -26,6 +26,10 @@ app.get('/teacher', (req,res) => {
   res.sendFile(path.join());
 });
 
+app.get('/problem', (req,res) => {
+    res.sendFile("/public/html/problem.html", {root: __dirname });		
+});
+
 app.get('/getproblems', (req,res) => {
 	const ids = client.db(dbName).collection("problems") // substitute your database and collection names;
 	ids.find({}).toArray(function(err, result) {
@@ -34,6 +38,13 @@ app.get('/getproblems', (req,res) => {
 	res.json(result)
 	});
 });
+
+app.get('/getid', (req,res) => {
+    const ids = client.db(dbName).collection("problems") // substitute your database and collection names;
+	ids.find({"_id" : ObjectId()})
+	res.json(result)
+	});
+
 
 app.listen(3000, () => {
 	client.connect(err => {
