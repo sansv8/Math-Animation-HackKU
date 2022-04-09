@@ -1,0 +1,42 @@
+body{
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.circle{
+    float: left;
+    margin: 2px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: red
+  }
+
+  .person{
+    float: left;
+    width: 100px;
+    height: 100px;
+  }
+
+  .entity{
+    float: left;
+    margin-left: 50px;
+    border-color: aqua;
+    padding: 10px;
+    width: 200px;
+    height:auto;
+    border-style: solid;
+  }
+
+  .basket{
+    margin-left: 5px;
+    height: auto
+  }
+
+  .personImage{
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .entityCanvas{
+    margin: 0 auto;
+  }
