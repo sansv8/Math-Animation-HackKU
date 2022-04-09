@@ -3,6 +3,9 @@
     </head>
     <body>
         <p id="problemStatement"></p>
+        <input type="text" id="answer" ><br>
+        <button type="button" onclick='check()'>Submit</button><br>
+        <p id="result"></p>
     </body>
     <script>
         var variable = "<%= variable %>";
@@ -22,7 +25,7 @@
                 problemStatement = partOne + partTwo;
             }
             else if(operator === "-"){
-                partTwo = `How many ${variable} does Abir have if Rahul gives him ${val2} ${variable} ?`;
+                partTwo = `How many ${variable} does Abir have if Rahul gives him ${val2} ${variable}?`;
                 problemStatement = partOnepartTwo + partTwo;
             }
             else if(operator === "*"){
@@ -33,11 +36,22 @@
                 partTwo = `How much does each ${variable} cost?`;
                 problemStatement = partOnepartFour + partTwo;
             }
-            console.log(problemStatement);
             return problemStatement;
         }
         var problemStatement = generateProblemStatement(val1,val2,operator,variable);
+        answer = eval(val1+operator+val2).toString();//Probably no so very safe
+        console.log(answer);
         document.getElementById("problemStatement").innerHTML = problemStatement;
+        function check()
+        {
+            if (answer ===document.getElementById("answer").value)
+            {
+                document.getElementById("result").innerHTML = "Correct"
+            }
+            else{                
+                document.getElementById("result").innerHTML = "Incorrect"
+            }
+        }
         
         
     </script>
