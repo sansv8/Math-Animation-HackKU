@@ -1,13 +1,33 @@
 <html>
     <head>
+        <link rel="stylesheet" href="/css/problem.css" >
     </head>
     <body>
         <p id="problemStatement"></p>
+        <div class="entityCanvas" >
+            <div class="entity" id="entity1">
+                <div class="person">
+                    <img src="/images/naruto.png" class="personImage">
+                </div>
+                <div class="basket" id="basket1"></div>
+
+            </div>
+            <div class="entity" id="entity2">
+                <div class="person">
+                    <img src="/images/goku.png" class="personImage">
+                </div>
+                <div class="basket" id="basket2"></div>
+            </div>
+        </div>
+
         <input type="text" id="answer" ><br>
         <button type="button" onclick='check()'>Submit</button><br>
         <p id="result"></p>
+
     </body>
-    <script>
+    <script type="module">
+        import anime from '/js/anime.es.js';
+
         var variable = "<%= variable %>";
         var val1 = "<%= operation.val1 %>"
         var val2 = "<%= operation.val2 %>"
@@ -38,9 +58,74 @@
             }
             return problemStatement;
         }
-        var problemStatement = generateProblemStatement(val1,val2,operator,variable);
+
+        const addVariabletoEntity = (val, entity, index) => {
+            for(let i=0; i < val; i++){
+                let element = document.createElement('div')
+                
+                element.classList.add('circle');
+                element.setAttribute("id",`circle${i}_${index}`);
+                entity.appendChild(
+                    element
+                );
+            }
+        }
+        const submitAnswer = () => {
+            let answer = eval(`${val1}${operator}${val2}`);
+        }
+        const getPosition = () => {
+            let x,y;
+            let lastElement = document.getElementById(`circle${basket2.children.length-1}_2`)
+            console.log(basket2.children.length)
+            let lastPos = lastElement.getBoundingClientRect()
+            let count = basket2.children.length
+            if(count%3==1 || count%3==2){
+                
+                y = lastPos.y
+                x = lastPos.x + 29
+            }
+            else if(count%3 == 0){
+                y = lastPos.y + 29
+                x = lastPos.x - 58
+            }
+            return {x:x,y:y}
+        }
+        const additionAnimation = () =>{
+            let entity2Pos = entity2.getBoundingClientRect();
+            var tl = anime.timeline({
+                    easing: 'easeOutExpo',
+                    duration: 750
+                    });
+
+            for(let i = basket1.children.length-1; i >= 0; i--){
+
+                let variableElement = document.getElementById(`circle${i}_1`)
+                let variablePos = variableElement.getBoundingClientRect()
+                const {x,y} = getPosition()
+                let translateY = y - variablePos.y
+                let translateX = x - variablePos.x
+
+                tl.add({
+                    targets: variableElement,
+                    translateX: translateX,
+                    translateY: translateY
+                })
+                let element = document.createElement('div');
+                element.classList.add('circle');
+                element.style.backgroundColor = "white";
+                element.setAttribute("id",`circle${basket2.children.length}_2`);
+                basket2.appendChild(
+                    element
+                );
+
+            }
+            
+        }
+        var problemStatement = generateProblemStatement(val1,val2,operator,variable)
+
         answer = eval(val1+operator+val2).toString();//Probably no so very safe
         console.log(answer);
+
         document.getElementById("problemStatement").innerHTML = problemStatement;
         function check()
         {
@@ -53,6 +138,15 @@
             }
         }
         
+        var entity1 = document.getElementById("entity1");
+        var entity2 = document.getElementById("entity2");
+        var basket1 = document.getElementById("basket1");
+        var basket2 = document.getElementById("basket2");
+        console.log(entity1);
+        addVariabletoEntity(val1,basket1,1);
+        addVariabletoEntity(val2,basket2,2);
+
+        additionAnimation();
         
     </script>
 </html>
