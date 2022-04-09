@@ -14,7 +14,7 @@ const client = new MongoClient(url);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile('/publc/html/index.html', {root: __dirname })
+  res.sendFile('/public/html/index.html', {root: __dirname })
 });
 
 app.get('/student', (req,res) => {
