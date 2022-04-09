@@ -56,8 +56,10 @@ app.post('/teacher', (req,res) => {
 		"operation": {"val1": req.body.value1, "val2": req.body.value2, "operator": req.body.operator},
 		"date": req.body.date
 	}
+	col.insertOne(problemDocument);
 	res.redirect('/teacher')
 });
+
 
 app.listen(3000, () => {
 	client.connect(err => {

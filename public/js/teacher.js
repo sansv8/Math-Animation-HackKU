@@ -118,15 +118,6 @@ function createSubmit(id, inner, form)
     //Set inputs's value
     input.setAttribute("value", inner);
 
-    //Create the label
-    let label = createProblemLabel(id, inner);
-
-    //Next, attach label to form
-    form.appendChild(label);
-
-    ///Next, add a new break to form
-    form.appendChild(document.createElement("br"));
-
     //Next, add input to form
     form.appendChild(input);
 
@@ -214,6 +205,7 @@ function loadProblems()
     for(let i = 0; i < data.length; i++)
     {
       console.log(extractDate(data[i]));
+      setTimeout(loadProblem(data[i]), 1000);
     }
   })
 
@@ -228,6 +220,29 @@ function loadProblem(data)
 
   //Extract date from data
   let date = extractDate(data);
+
+
+  //Set the id of problem to be date
+  problem.setAttribute("id", date);
+
+  //Create the problem title for the problem
+  let problemTitle = document.createElement("p");
+
+  //Next, set the innerhtml of problemTile to be date
+  problemTitle.innerHTML = "Problem " + date;
+
+  //Attach problemTtile to problem
+  problem.appendChild(problemTitle);
+
+  //Load form
+  let form = loadProblemForm(data, date);
+
+  //Attach form to problem
+  problem.appendChild(form);
+
+  //Append problem to problemForms
+  window.document.querySelector('#problemForms').appendChild(problem);
+  
 }
 
 //Extract date from databsed
@@ -261,4 +276,82 @@ function extractDate(data)
   return today;
 }
 
-//loadProblems();
+//Create a new form for existing problems
+function loadProblemForm(data, date)
+{
+  //Firstly, create a new form
+  let form = document.createElement("form");
+
+  //Set the method of form to be post
+  form.setAttribute("method", "post");
+
+  //Creat a hidden input for date
+  let hidden = createProblemInput("date", "hidden");
+
+  //Set the value of hiddent to be date
+  hidden.setAttribute("value", date);
+
+  //Attach hidden to from
+  form.appendChild(hidden);
+
+  //Create a new input for variable
+  form = loadTextBox("variable", "Varaible", form, data.variable);
+
+  //Create a new input for Value #1
+  form = loadTextBox("value1", "Value #1", form, data.operation.val1);
+
+  //Create a new input for operator
+  form = loadTextBox("operator", "Operator", form, data.operation.operator);
+
+  //Create a new input for value #2
+  form = loadTextBox("value2", "Value #2", form, data.operation.val2);
+
+  //Create submit box
+  form = createSubmit("update", "Update Problem", form);
+
+  //Return the form
+  return form;
+}
+
+//Load the textboxes for exisiting problems
+function loadTextBox(id, inner, form, value)
+{
+  //Firstly, create a new input using id and type
+  let input = createProblemInput(id, "text");
+
+  //Create the label
+  let label = createProblemLabel(id, inner);
+
+  //Set input's value
+  input.setAttribute("value", value);
+
+  //Next, attach label to form
+  form.appendChild(label);
+
+  ///Next, add a new break to form
+  form.appendChild(document.createElement("br"));
+
+  //Next, add input to form
+  form.appendChild(input);
+
+  //Add another break
+  form.appendChild(document.createElement("br"));
+
+  //Return form
+  return form;
+}
+
+//Deletes a problem 
+function deleteProblem()
+{
+  //Firstly, get the last child of problem
+  let lastProblem = window.document.querySelector("#problemForms").lastChild;
+
+  //Next, remove lastProblem from problemForms
+  window.document.querySelector("#problemForms").removeChild(lastProblem);
+
+  //Next, create a delete request to the main server
+  fetch("http://localhost:3000/getproblems", {headers: {}})
+
+}
+loadProblems();
