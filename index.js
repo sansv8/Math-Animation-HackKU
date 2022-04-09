@@ -20,18 +20,17 @@ app.get('/student', (req,res) => {
 	// The database to use
  	const dbName = "Cluster0";
 
-		temp = ""
 	client.connect(err => {
     console.log("Connected to MongoDB server...");
-	const ids = client.db(dbName).collection("problems") // substitute your database and collection names
-	ids.find({}).toArray(function(err, result) {
-        console.log("find query executed...")
-				temp=result    
-        console.log(temp)
+		const ids = client.db(dbName).collection("problems") // substitute your database and collection names
+		ids.find({}).toArray(function(err, result) {
+	        console.log("find query executed...")
+	        console.log(result)
+					res.json(result)
+		});
 	});
-		
-});
-	res.send(temp+"1234")
+	
+	client.close();
 
 	
 });
