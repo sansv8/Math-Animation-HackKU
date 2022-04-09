@@ -4,7 +4,6 @@
     </head>
     <body>
         <p id="problemStatement"></p>
-
         <div class="entityCanvas" >
             <div class="entity" id="entity1">
                 <div class="person">
@@ -20,14 +19,11 @@
                 <div class="basket" id="basket2"></div>
             </div>
         </div>
-        <br>
-        <div>
-            <form action="" onsubmit="submitAnswer();return false;">
-                <label for="submitAnswerText">Answer</label><br>
-                <input type="text" id="submitAnswerText">
-                <input type="submit" id="answerSubmitButton">
-            </form>
-        </div>
+
+        <input type="text" id="answer" ><br>
+        <button type="button" onclick='check()'>Submit</button><br>
+        <p id="result"></p>
+
     </body>
     <script type="module">
         import anime from '/js/anime.es.js';
@@ -38,14 +34,31 @@
         var operator = "<%= operation.operator %>"
 
         const generateProblemStatement = (val1,val2,operator,variable) => {
-            let partOne = `Rahul has ${val1} ${variable}, Abir has ${val2} ${variable}. `
+            let partOne = `Rahul has ${val1} ${variable}, Abir has ${val2} ${variable}. `;
+            let partOnepartTwo = `Rahul has ${val1} ${variable}. ` ;
+            let partOnepartThree = `Rahul has ${val1} ${variable} which cost $${val2} each. ` ;
+            let partOnepartFour = `${val1} ${variable} cost ${val2}. ` ;
             let partTwo;
+            let problemStatement;
             if(operator === "+"){
-                partTwo = `How many ${variable} do they have together?`
+                partTwo = `How many ${variable} do they have together?`;
+                problemStatement = partOne + partTwo;
             }
-            let problemStatement = partOne + partTwo;
+            else if(operator === "-"){
+                partTwo = `How many ${variable} does Abir have if Rahul gives him ${val2} ${variable}?`;
+                problemStatement = partOnepartTwo + partTwo;
+            }
+            else if(operator === "*"){
+                partTwo = `How much does ${val1} ${variable} cost?`;
+                problemStatement = partOnepartThree + partTwo;
+            }
+            else if(operator === "/"){
+                partTwo = `How much does each ${variable} cost?`;
+                problemStatement = partOnepartFour + partTwo;
+            }
             return problemStatement;
         }
+
         const addVariabletoEntity = (val, entity, index) => {
             for(let i=0; i < val; i++){
                 let element = document.createElement('div')
@@ -109,7 +122,21 @@
             
         }
         var problemStatement = generateProblemStatement(val1,val2,operator,variable)
+
+        answer = eval(val1+operator+val2).toString();//Probably no so very safe
+        console.log(answer);
+
         document.getElementById("problemStatement").innerHTML = problemStatement;
+        function check()
+        {
+            if (answer ===document.getElementById("answer").value)
+            {
+                document.getElementById("result").innerHTML = "Correct"
+            }
+            else{                
+                document.getElementById("result").innerHTML = "Incorrect"
+            }
+        }
         
         var entity1 = document.getElementById("entity1");
         var entity2 = document.getElementById("entity2");
