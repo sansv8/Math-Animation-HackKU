@@ -23,7 +23,7 @@ app.get('/student', (req,res) => {
 
 
 app.get('/teacher', (req,res) => {
-  res.sendFile(path.join());
+  res.sendFile("/public/html/teacher.html", {root: __dirname});
 });
 
 app.get('/problem', (req,res) => {
