@@ -20,20 +20,15 @@ app.get('/student', (req,res) => {
 	// The database to use
  	const dbName = "Cluster0";
 
-	client.connect(err => {
-    console.log("Connected to MongoDB server...");
-	const ids = client.db(dbName).collection("problems") // substitute your database and collection names;
+	client.db(dbName).collection("problems") // substitute your database and collection names;
 		//temp = ""
 	ids.find({}).toArray(function(err, result) {
         console.log("find query executed...")    
         console.log(result)
-				//temp=result
 	});
-		//res.send(result)
+		
 });
 
-	
-});
 
 app.get('/teacher', (req,res) => {
   res.sendFile(path.join());
@@ -44,5 +39,8 @@ app.post('/getproblems', (req,res) => {
 });
 
 app.listen(3000, () => {
+	client.connect(err => {
+		console.log('Mongo connected lmao');
+	})
   console.log('server started');
 });
