@@ -20,7 +20,7 @@ function createProblem()
   problem.appendChild(problemTitle);
 
   //Create a new form for problem
-  let form = createProblemForm();
+  let form = createProblemForm(date);
 
   //Attach form to problem
   problem.appendChild(form);
@@ -59,17 +59,27 @@ function createProblemDate()
   //Set today to be in the form month/day/year
   today = mm + '/' + dd + '/' + yyyy + ' ' + hour + ':' + minutes + ":" + second;
 
-  
-
   //Return today
   return today;
 }
 
 //Create the problem form for the problem
-function createProblemForm()
+function createProblemForm(date)
 {
     //Firstly, create a new form
     let form = document.createElement("form");
+
+    //Set the method of form to be post
+    form.setAttribute("method", "post");
+
+    //Creat a hidden input for date
+    let hidden = createProblemInput("date", "hidden");
+
+    //Set the value of hiddent to be date
+    hidden.setAttribute("value", date);
+
+    //Attach hidden to from
+    form.appendChild(hidden);
 
     //Create a new input for variable
     form = createTextBox("variable", "Varaible", form);
@@ -136,6 +146,9 @@ function createTextBox(id, inner, form)
     //Create the label
     let label = createProblemLabel(id, inner);
 
+    //Set input's value
+    input.setAttribute("value","");
+
     //Next, attach label to form
     form.appendChild(label);
 
@@ -187,4 +200,65 @@ function createProblemLabel(id, inner)
     return label;
 }
 
-createProblem();
+
+//Load problems from database
+function loadProblems()
+{
+  //Firstly, set a fetch request to the getproblems
+  fetch("http://localhost:3000/getproblems")
+  .then((res) => {
+    return res.json();
+  })
+  .then((data)=>{
+    //For each data in date
+    for(let i = 0; i < data.length; i++)
+    {
+      console.log(extractDate(data[i]));
+    }
+  })
+
+}
+
+//Create a new problem with data
+function loadProblem(data)
+{
+  //Create a new div tag for the problem
+  //Firstly, we create a new tag for form
+  let problem = document.createElement("div");
+
+  //Extract date from data
+  let date = extractDate(data);
+}
+
+//Extract date from databsed
+function extractDate(data)
+{
+  //Firstly, create a new date using the data
+  let today = new Date(data.date);
+
+//Get the day of datae
+  var dd = String(today.getDate()).padStart(2, '0');
+
+  //Get the month 
+  var mm = String(today.getMonth() + 1).padStart(2, '0');       
+
+  //Get the year
+  var yyyy = today.getFullYear();
+
+  //Get the hour
+  var hour = today.getHours();
+
+  //Get minutes
+  var minutes = today.getMinutes();
+
+  //Get second
+  var second = today.getSeconds();
+
+  //Set today to be in the form month/day/year
+  today = mm + '/' + dd + '/' + yyyy + ' ' + hour + ':' + minutes + ":" + second;
+
+  //Return today
+  return today;
+}
+
+//loadProblems();
