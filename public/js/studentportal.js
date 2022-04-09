@@ -18,7 +18,8 @@ fetch("http://localhost:3000/getproblems")
               var second = date.getSeconds();
               date = mm + '/' + dd + '/' + yyyy + ' ' + hour + ':' + minutes + ":" + second;*/
 
-              document.getElementById("ayylmao").innerHTML+=" <li class='list-group-item'> Problem: "+ date+" <button type='button' class='btn btn-primary' href='/problem/" +id+"'>"+"Solve"+"</button></li>";
+              //document.getElementById("ayylmao").innerHTML+=" <li class='list-group-item'> Problem: "+ date+" <button type='button' class='btn btn-primary' href='/problem/" +id+"'>"+"Solve"+"</button></li>";
+document.getElementById("ayylmao").innerHTML+=" <li class='list-group-item'> <p>Problem: "+ date+"<p> <a href='/problem/" +id+"'>"+"Solve"+"</a></li>";
 
            }
          })
