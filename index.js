@@ -15,22 +15,23 @@ app.get('/', (req, res) => {
 
 app.get('/student', (req,res) => {
   //res.sendFile("/views/student.html", {root: __dirname });
-	res.send('Student portal')
+	//res.send('Student portal')
 	const client = new MongoClient(url);
 	// The database to use
  	const dbName = "Cluster0";
 
+		temp = ""
 	client.connect(err => {
     console.log("Connected to MongoDB server...");
-	const ids = client.db(dbName).collection("problems") // substitute your database and collection names;
-		//temp = ""
+	const ids = client.db(dbName).collection("problems") // substitute your database and collection names
 	ids.find({}).toArray(function(err, result) {
-        console.log("find query executed...")    
-        console.log(result)
-				//temp=result
+        console.log("find query executed...")
+				temp=result    
+        console.log(temp)
 	});
-		//res.send(result)
+		
 });
+	res.send(temp+"1234")
 
 	
 });
