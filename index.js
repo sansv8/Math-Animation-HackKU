@@ -36,7 +36,8 @@ app.get('/student', (req,res) => {
 });
 
 app.get('/teacher', (req,res) => {
-  res.sendFile(path.join());
+  res.sendFile('views/teacher.html', {root: __dirname });
+ 
 });
 
 app.post('/getproblems', (req,res) => {
@@ -46,3 +47,4 @@ app.post('/getproblems', (req,res) => {
 app.listen(3000, () => {
   console.log('server started');
 });
+
