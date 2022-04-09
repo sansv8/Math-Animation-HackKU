@@ -18,8 +18,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/student', (req,res) => {
-    res.sendFile("/public/html/student.html", {root: __dirname });		
+
+  //res.sendFile("/views/student.html", {root: __dirname });
+	//res.send('Student portal')
+	const client = new MongoClient(url);
+	// The database to use
+ 	const dbName = "Cluster0";
+
+	client.connect(err => {
+    console.log("Connected to MongoDB server...");
+		const ids = client.db(dbName).collection("problems") // substitute your database and collection names
+		ids.find({}).toArray(function(err, result) {
+	        console.log("find query executed...")
+	        console.log(result)
+					res.json(result)
+		});
+	});
+	
+	client.close();		
 });
+
 
 
 app.get('/teacher', (req,res) => {

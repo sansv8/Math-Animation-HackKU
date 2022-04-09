@@ -1,5 +1,13 @@
 {
   "files": {
+    "index.js": [
+      {
+        "id": "ee6d24a3-2b5c-4e44-9b63-4335ce3f3ce6",
+        "line": 23,
+        "version": 50,
+        "index": 601
+      }
+    ],
     "views/student.html": [
       {
         "id": "bcb91f85-483d-4000-9a1e-33b24c6d3381",
