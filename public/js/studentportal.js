@@ -7,6 +7,6 @@ fetch("http://localhost:3000/getproblems")
            {
               var id = data[i]._id
               console.log(id)
-              document.getElementById("ayylmao").innerHTML+="<a href='/problem?id=" +id+"'>"+id+"</a><br>";
+              document.getElementById("ayylmao").innerHTML+="<a href='/problem/" +id+"'>"+id+"</a><br>";
            }
          })

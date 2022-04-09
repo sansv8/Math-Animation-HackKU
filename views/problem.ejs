@@ -1,0 +1,27 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <p id="problemStatement"></p>
+    </body>
+    <script>
+        var variable = "<%= variable %>";
+        var val1 = "<%= operation.val1 %>"
+        var val2 = "<%= operation.val2 %>"
+        var operator = "<%= operation.operator %>"
+
+        const generateProblemStatement = (val1,val2,operator,variable) => {
+            let partOne = `Rahul has ${val1} ${variable}, Abir has ${val2} ${variable}. `
+            let partTwo;
+            if(operator === "+"){
+                partTwo = `How many ${variable} do they have together?`
+            }
+            let problemStatement = partOne + partTwo;
+            return problemStatement;
+        }
+        var problemStatement = generateProblemStatement(val1,val2,operator,variable)
+        document.getElementById("problemStatement").innerHTML = problemStatement;
+        
+        
+    </script>
+</html>
