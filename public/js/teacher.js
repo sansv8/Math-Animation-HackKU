@@ -210,7 +210,7 @@ function createProblemLabel(id, inner)
 function loadProblems()
 {
   //Firstly, set a fetch request to the getproblems
-  fetch("http://localhost:3000/getproblems")
+  fetch("https://pineapple-math.herokuapp.com/getproblems")
   .then((res) => {
     return res.json();
   })
@@ -380,7 +380,7 @@ function deleteProblem()
   date = convertDate(date);
 
   //Next, create a delete request to the main server
-  fetch("http://localhost:3000/teacher/"+date, {method:"DELETE"});
+  fetch("https://pineapple-math.herokuapp.com/teacher/"+date, {method:"DELETE"});
 }
 
 //Converts the date 
