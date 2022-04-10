@@ -19,7 +19,7 @@ fetch("http://localhost:3000/getproblems")
               date = mm + '/' + dd + '/' + yyyy + ' ' + hour + ':' + minutes + ":" + second;*/
 
               //document.getElementById("ayylmao").innerHTML+=" <li class='list-group-item'> Problem: "+ date+" <button type='button' class='btn btn-primary' href='/problem/" +id+"'>"+"Solve"+"</button></li>";
-document.getElementById("ayylmao").innerHTML+=" <li class='list-group-item'> <p>Problem: "+ date+"<p> <a href='/problem/" +id+"'> <button class='btn btn-primary'>"+"Solve"+"</button></a></li>";
+document.getElementById("ayylmao").innerHTML+=" <li class='list-group-item d-flex justify-content-around align-middle'> <p style='font-size:20px;'>Problem: "+ date+"<p> <a href='/problem/" +id+"'> <button class='btn btn-primary' style='width:200%';>"+"Solve"+"</button></a></li>";
 
            }
          })
