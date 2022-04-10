@@ -33,6 +33,18 @@
         var val2 = "<%= operation.val2 %>"
         var operator = "<%= operation.operator %>"
 
+        function check()
+        {
+            let answer = eval(val1+operator+val2).toString();//Probably no so very safe
+            if (answer ===document.getElementById("answer").value)
+            {
+                document.getElementById("result").innerHTML = "Correct"
+            }
+            else{                
+                document.getElementById("result").innerHTML = "Incorrect"
+            }
+        }
+
         const generateProblemStatement = (val1,val2,operator,variable) => {
             let partOne = `Rahul has ${val1} ${variable}, Abir has ${val2} ${variable}. `;
             let partOnepartTwo = `Rahul has ${val1} ${variable}. ` ;
@@ -123,20 +135,10 @@
         }
         var problemStatement = generateProblemStatement(val1,val2,operator,variable)
 
-        answer = eval(val1+operator+val2).toString();//Probably no so very safe
-        console.log(answer);
+        
 
         document.getElementById("problemStatement").innerHTML = problemStatement;
-        function check()
-        {
-            if (answer ===document.getElementById("answer").value)
-            {
-                document.getElementById("result").innerHTML = "Correct"
-            }
-            else{                
-                document.getElementById("result").innerHTML = "Incorrect"
-            }
-        }
+        
         
         var entity1 = document.getElementById("entity1");
         var entity2 = document.getElementById("entity2");
