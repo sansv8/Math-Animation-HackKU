@@ -60,9 +60,11 @@
             if (answer ===document.getElementById("answer").value)
             {
                 document.getElementById("result").innerHTML = "Correct"
+                document.getElementById("result").style.color = "green"
             }
             else{                
                 document.getElementById("result").innerHTML = "Incorrect"
+                document.getElementById("result").style.color = "red"
             }
         }
         const startHint = () => {
