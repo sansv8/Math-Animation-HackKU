@@ -21,7 +21,8 @@
         </div>
 
         <input type="text" id="answer" ><br>
-        <button type="button" onclick='check()'>Submit</button><br>
+        <button type="button" id="submitButton">Submit</button><br>
+        <button id="hintButton">Hint?</button>
         <p id="result"></p>
 
     </body>
@@ -33,6 +34,8 @@
         var val2 = "<%= operation.val2 %>"
         var operator = "<%= operation.operator %>"
 
+        
+
         function check()
         {
             let answer = eval(val1+operator+val2).toString();//Probably no so very safe
@@ -42,6 +45,21 @@
             }
             else{                
                 document.getElementById("result").innerHTML = "Incorrect"
+            }
+        }
+
+        const startHint = () => {
+            if(operator === "+"){
+                additionAnimation()
+            }
+            else if(operator === "-"){
+                return
+            }
+            else if(operator === "*"){
+                return
+            }
+            else if(operator === "/"){
+                return
             }
         }
 
@@ -138,7 +156,8 @@
         
 
         document.getElementById("problemStatement").innerHTML = problemStatement;
-        
+        document.getElementById("hintButton").addEventListener("click",startHint,false);
+        document.getElementById("submitButton").addEventListener("click",check,false);
         
         var entity1 = document.getElementById("entity1");
         var entity2 = document.getElementById("entity2");
@@ -147,8 +166,6 @@
         console.log(entity1);
         addVariabletoEntity(val1,basket1,1);
         addVariabletoEntity(val2,basket2,2);
-
-        additionAnimation();
         
     </script>
 </html>
