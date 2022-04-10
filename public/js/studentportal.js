@@ -1,4 +1,4 @@
-fetch("http://localhost:3000/getproblems")
+fetch("https://pineapple-math.herokuapp.com/getproblems")
          .then((res)=>{
            return res.json();
          })
