@@ -28,7 +28,7 @@
         <input type="text" id="answer" ><br>
         <button type="button" class="btn btn-primary" id="submitButton">Submit</button><br>
         <button class="btn btn-info" id="hintButton">Hint?</button>
-        <p id="result"></p>
+        <b><p id="result"></p></b>
 
     </body>
     <script type="module">
@@ -47,9 +47,11 @@
             if (answer ===document.getElementById("answer").value)
             {
                 document.getElementById("result").innerHTML = "Correct"
+                document.getElementById("result").style.color = "green";
             }
             else{                
                 document.getElementById("result").innerHTML = "Incorrect"
+                document.getElementById("result").style.color = "red";
             }
         }
 
