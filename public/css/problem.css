@@ -2,6 +2,10 @@ body{
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
+.problemStatement{
+  margin-left: 15px;
+}
+
 .circle{
     float: left;
     margin: 5px;
