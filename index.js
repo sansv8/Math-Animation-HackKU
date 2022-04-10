@@ -78,22 +78,21 @@ app.delete('/teacher/:date', (req, res) => {
 })
 
 app.post('/teacher/update', (req,res) => {
-	/*
-	const col = client.db(dbName).collection("problems");
 	
+	const col = client.db(dbName).collection("problems");
 	col.updateOne(
 		{"date": req.body.date},
 		{ $set: {
 			"variable": req.body.variable,
 			"operation": {"val1": req.body.value1, "val2": req.body.value2, "operator": req.body.operator}}
 		}
-	)
-	*/
-	res.redirect("/teacher");
+	).then((obj) => {
+		res.redirect("/teacher");
+	})
 })
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT||3000, () => {
 	client.connect(err => {
 		console.log('Mongo connected lmao');
 	})

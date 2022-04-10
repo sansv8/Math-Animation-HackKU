@@ -10,6 +10,9 @@ function createProblem()
   //Next, create the id of the problem using problemNum
   problem.setAttribute("id", date);
 
+  //Set the class of problem
+  problem.style.margin = "10px";
+
   //Next, create a new paragraph that will store the date
   let problemTitle = document.createElement("p");
 
@@ -85,7 +88,7 @@ function createProblemForm(date)
     form.appendChild(hidden);
 
     //Create a new input for variable
-    form = createTextBox("variable", "Varaible", form);
+    form = createTextBox("variable", "Variable", form);
 
     //Create a new input for Value #1
     form = createTextBox("value1", "Value #1", form);
@@ -121,6 +124,11 @@ function createSubmit(id, inner, form)
     //Set inputs's value
     input.setAttribute("value", inner);
 
+    //Add classes to input
+    input.classList.add("btn");
+    input.classList.add("btn-primary");
+    input.classList.add("btn-block");
+
     //Next, add input to form
     form.appendChild(input);
 
@@ -142,6 +150,9 @@ function createTextBox(id, inner, form)
 
     //Set input's value
     input.setAttribute("value","");
+
+    //Set input's style
+    input.style.marginBottom = "20px";
 
     //Next, attach label to form
     form.appendChild(label);
@@ -199,7 +210,7 @@ function createProblemLabel(id, inner)
 function loadProblems()
 {
   //Firstly, set a fetch request to the getproblems
-  fetch("http://localhost:3000/getproblems")
+  fetch("https://pineapple-math.herokuapp.com/getproblems")
   .then((res) => {
     return res.json();
   })
@@ -228,11 +239,14 @@ function loadProblem(data)
   //Set the id of problem to be date
   problem.setAttribute("id", date);
 
+   //Set the class of problem
+   problem.style.margin = "10px";
+
   //Create the problem title for the problem
   let problemTitle = document.createElement("p");
 
   //Next, set the innerhtml of problemTile to be date
-  problemTitle.innerHTML = "Problem " + date;
+  problemTitle.innerHTML = "Problem: " + date;
 
   //Attach problemTtile to problem
   problem.appendChild(problemTitle);
@@ -301,7 +315,7 @@ function loadProblemForm(data, date)
   form.appendChild(hidden);
 
   //Create a new input for variable
-  form = loadTextBox("variable", "Varaible", form, data.variable);
+  form = loadTextBox("variable", "Variable", form, data.variable);
 
   //Create a new input for Value #1
   form = loadTextBox("value1", "Value #1", form, data.operation.val1);
@@ -330,6 +344,9 @@ function loadTextBox(id, inner, form, value)
 
   //Set input's value
   input.setAttribute("value", value);
+
+  //Set input's style
+  input.style.marginBottom = "20px";
 
   //Next, attach label to form
   form.appendChild(label);
@@ -363,7 +380,7 @@ function deleteProblem()
   date = convertDate(date);
 
   //Next, create a delete request to the main server
-  fetch("http://localhost:3000/teacher/"+date, {method:"DELETE"});
+  fetch("https://pineapple-math.herokuapp.com/teacher/"+date, {method:"DELETE"});
 }
 
 //Converts the date 
@@ -376,4 +393,5 @@ function convertDate(date)
    console.log(date);
    return date;
 }
+
 loadProblems();
