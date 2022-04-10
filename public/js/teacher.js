@@ -72,6 +72,9 @@ function createProblemForm(date)
     //Set the method of form to be post
     form.setAttribute("method", "post");
 
+    //Set the action of the form to be post
+    form.setAttribute("action", "/teacher");
+
     //Creat a hidden input for date
     let hidden = createProblemInput("date", "hidden");
 
@@ -285,6 +288,9 @@ function loadProblemForm(data, date)
   //Set the method of form to be post
   form.setAttribute("method", "post");
 
+  //Set the method of form to be teach/update
+  form.setAttribute("action", "/teacher/update");
+
   //Creat a hidden input for date
   let hidden = createProblemInput("date", "hidden");
 
@@ -350,8 +356,24 @@ function deleteProblem()
   //Next, remove lastProblem from problemForms
   window.document.querySelector("#problemForms").removeChild(lastProblem);
 
-  //Next, create a delete request to the main server
-  fetch("http://localhost:3000/getproblems", {headers: {}})
+  //Get the date from lastProblem
+  let date = lastProblem.id;
 
+  //Convert date to be sent
+  date = convertDate(date);
+
+  //Next, create a delete request to the main server
+  fetch("http://localhost:3000/teacher/"+date, {method:"DELETE"});
+}
+
+//Converts the date 
+function convertDate(date)
+{
+   //Replace the character at index 2,5and 10 with A
+   date = date.replaceAll("/", "A");
+   date = date.replaceAll(":","B");
+   date= date.replaceAll(" ", "C");
+   console.log(date);
+   return date;
 }
 loadProblems();

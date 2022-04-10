@@ -67,6 +67,31 @@ app.post('/teacher', (req,res) => {
 	res.redirect('/teacher')
 });
 
+app.delete('/teacher/:date', (req, res) => {
+	let date = req.params.date;
+	let col = client.db(dbName).collection("problems");
+	date = date.replaceAll("A", "/");
+	date = date.replaceAll("B", ":");
+	date = date.replaceAll("C", " ");
+	col.deleteOne({"date":date});
+	res.sendStatus(204);
+})
+
+app.post('/teacher/update', (req,res) => {
+	/*
+	const col = client.db(dbName).collection("problems");
+	
+	col.updateOne(
+		{"date": req.body.date},
+		{ $set: {
+			"variable": req.body.variable,
+			"operation": {"val1": req.body.value1, "val2": req.body.value2, "operator": req.body.operator}}
+		}
+	)
+	*/
+	res.redirect("/teacher");
+})
+
 
 app.listen(3000, () => {
 	client.connect(err => {
