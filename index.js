@@ -7,15 +7,17 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const path = require('path')
 
-require('dotenv').config();
+const result = require('dotenv').config();
 
 
 const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 const { request } = require('http');
-const url = "mongodb+srv://"+process.env.MONGODB_USERNAME+":"+process.env.MONGODB_PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
+const url = "mongodb+srv://"+MONGODB_USERNAME+":"+MONGODB_PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
 const dbName = "Cluster0";
-const client = new MongoClient(url);
+const client = new MongoClient(url,{ useUnifiedTopology: true });
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
