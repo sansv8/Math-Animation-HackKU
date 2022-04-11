@@ -13,7 +13,7 @@ require('dotenv').config();
 const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 const { request } = require('http');
-const url = "mongodb+srv://"+process.env.MONGODB_USERNAME+":"+process.env.MONGODB_PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const url = "mongodb+srv://"+parse(process.env.MONGODB_USERNAME)+":"+parse(process.env.MONGODB_PASSWORD)+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
 const dbName = "Cluster0";
 const client = new MongoClient(url);
 
