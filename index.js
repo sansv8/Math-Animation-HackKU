@@ -7,11 +7,13 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const path = require('path')
 
+require('dotenv').config();
+
 
 const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 const { request } = require('http');
-const url = "mongodb+srv://math_animation:bzSsxbPMCntsYMSl@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const url = "mongodb+srv://"+process.env.MONGODB_USERNAME+":"+process.env.MONGODB_PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
 const dbName = "Cluster0";
 const client = new MongoClient(url);
 
