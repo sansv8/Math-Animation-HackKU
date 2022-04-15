@@ -15,7 +15,7 @@ const ObjectId = require("mongodb").ObjectId;
 const { request } = require('http');
 const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
-const url = "mongodb+srv://MONGODB_USERNAME:MONGODB_PASSWORD@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const url = "mongodb+srv://"+MONGODB_USERNAME+":"+MONGODB_PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
 const dbName = "Cluster0";
 const client = new MongoClient(url,{ useUnifiedTopology: true });
 
