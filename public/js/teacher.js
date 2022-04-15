@@ -380,7 +380,7 @@ function deleteProblem()
   date = convertDate(date);
 
   //Next, create a delete request to the main server
-  fetch("https://pineapple-math.herokuapp.com/teacher/"+date, {method:"DELETE"});
+  fetch("https://pineapple-math.herokuapp.com/getproblems/"+date, {method:"DELETE"});
 }
 
 //Converts the date 
