@@ -13,9 +13,9 @@ const result = require('dotenv').config();
 const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 const { request } = require('http');
-const MONGODB_USERNAME = process.env.MONGODB_USERNAME;
-const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD;
-const url = "mongodb+srv://"+MONGODB_USERNAME+":"+MONGODB_PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const USERNAME = process.env.ENV_MONGODB_USERNAME;
+const PASSWORD = process.env.ENV_MONGODB_PASSWORD;
+const url = "mongodb+srv://"+USERNAME+":"+PASSWORD+"@cluster0.2ielq.mongodb.net/Cluster0?retryWrites=true&w=majority";
 const dbName = "Cluster0";
 const client = new MongoClient(url,{ useUnifiedTopology: true });
 
