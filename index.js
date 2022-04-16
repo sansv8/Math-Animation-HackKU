@@ -19,7 +19,6 @@ const url = "mongodb+srv://"+USERNAME+":"+PASSWORD+"@cluster0.2ielq.mongodb.net/
 const dbName = "Cluster0";
 const client = new MongoClient(url,{ useUnifiedTopology: true });
 
-console.log(url)
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
