@@ -32,10 +32,11 @@ app.get('/student', (req,res) => {
     res.sendFile("/public/html/student.html", {root: __dirname });		
 });
 
-
+//Portion of my work
 app.get('/teacher', (req,res) => {
   res.sendFile("/public/html/teacher.html", {root: __dirname});
 });
+//End of portion
 
 app.get('/problem/:id', (req,res) => {
 	console.log(req.params.id);
@@ -61,6 +62,7 @@ app.get('/getid', (req,res) => {
 	res.json(result)
 	});
 
+//Portion of my work
 app.post('/teacher', (req,res) => {
 	const col = client.db(dbName).collection("problems");
 	let problemDocument = {
@@ -95,6 +97,7 @@ app.post('/teacher/update', (req,res) => {
 		res.redirect("/teacher");
 	})
 })
+//End of portion
 
 
 app.listen(process.env.PORT||3000, () => {
